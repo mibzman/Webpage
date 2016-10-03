@@ -9,7 +9,9 @@
 			Enter email:
 			<input id = "email1" type="text">
 			<input type="button" value="Validate" onClick="Validate();">
-			<font id = "email1Output"></font>
+			<font id = "email1Output"></font> <br>
+			Enter email:
+			<input id = "email2" onkeyup="SingleValidate();" type="text">
 		</form>
 
 <SCRIPT LANGUAGE = "Javascript">
@@ -35,6 +37,39 @@
 	                var output = Factorial(nextValue);
 		}
 		return input * output;
+	}
+	var IsAfterAt = false;
+	function SingleValidate(){
+		var thisString = document.getElementById("email2").value;
+		var thisChar = thisString[thisString.length -1];
+		if (thisChar == "@"){
+			if (IsAfterAt == true) {
+				 alert("That Character is Invalid!");
+			}else{
+				IsAfterAT = true;
+			}
+		}else{
+			if(!IsAfterAt){
+				if(!IsValidChar(thisChar)){
+					alert("That Character is Invalid!");
+				}
+				if (thisString[thisString.length -2] == "." && thisChar == "."){
+					 alert("That Character is Invalid!");
+				}
+			}else{
+				if (thisString[thisString.length -2] == "@" && thisChar == "-"){
+					alert("That Character is Invalid!");
+				}
+				if(!IsValidDomainChar(thisChar)){
+                                        alert("That Character is Invalid!");
+                                }
+			
+			}
+		}
+	}
+
+	function moveImage(){
+		//go here: https://www.kirupa.com/snippets/move_element_to_click_position.htm
 	}
 
 
@@ -75,6 +110,7 @@
 			
 
 		document.getElementById("email1Output").innerHTML = newEmail + "@" + newAfter;
+
 
 	}
 	
@@ -133,6 +169,7 @@
 	
 	function isSpecial(n) {
 		return n.length === 1 && n.match(/[{]|[}]|[!]|[#]|[$]|[%]|[&]|[']|[*]|[+]|[-]|[\/]|[=]|[?]|[\^]|[_]|[`]|[|]|[~]|[.]/);
+		//most special characters are allowed in the local part of an email.  source: https://en.wikipedia.org/wiki/Email_address#Syntax
 	}
 
 
