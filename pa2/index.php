@@ -1,18 +1,47 @@
 <?php require "front_header.html"; ?>
+<head>
+<style type="text/css">
 
+#contentContainer {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top:0px;
+	left: 0px;
+}
+
+#movingImg {
+	position: relative;
+	left: 50%;
+	top: 0;
+	transition: left .5s ease-in, top .5s ease-in;
+}
+
+</style>
+</head>
 
 	<body>
-		<p> factorial output: </p>
-		<font id = "output"></font>
+		 <div id = "contentContainer">
+                <img id="movingImg" src="halbullet.png" >
+                <p> factorial output: </p>
+                <font id = "output"></font>
 
-		<form>
-			Enter email:
-			<input id = "email1" type="text">
-			<input type="button" value="Validate" onClick="Validate();">
-			<font id = "email1Output"></font> <br>
-			Enter email:
-			<input id = "email2" onkeyup="SingleValidate();" type="text">
-		</form>
+                <form>
+                        Enter email:
+                        <input id = "email1" type="text">
+                        <input type="button" value="Validate" onClick="Validate();">
+                        <font id = "email1Output"></font> <br>
+                        Enter email:
+                        <input id = "email2" onkeyup="SingleValidate();" type="text"> <br><br>
+
+
+                </form>
+
+                 <input id = "moveimg" value="ACTIVATE CLICK IMAGE TRACKING" onClick="MoveImage();" type="button">
+
+                </div>
+
+		
 
 <SCRIPT LANGUAGE = "Javascript">
 	function TakeInput(){
@@ -68,8 +97,42 @@
 		}
 	}
 
-	function moveImage(){
-		//go here: https://www.kirupa.com/snippets/move_element_to_click_position.htm
+
+	var image = document.querySelector("#movingImg");
+	var container = document.querySelector("#contentContainer");
+	function MoveImage(){
+		container.addEventListener("click", GetClickPosition, false);
+		
+	}
+
+	function GetClickPosition(e){
+		var parentPosition = GetPosition(e.currentTarget);
+		var xPosition = e.clientX - parentPosition.x - (image.clientWidth / 2);
+		var yPosition = e.clientY - parentPosition.y - (image.clientHeight / 2);
+     
+		image.style.left = xPosition + "px";
+ 		image.style.top = yPosition + "px";
+	}
+
+	function GetPosition(el) {
+		var xPos = 0;
+		var yPos = 0;
+ 
+		while (el) {
+			if (el.tagName == "BODY") {
+				var xScroll = el.scrollLeft || document.documentElement.scrollLeft;
+				var yScroll = el.scrollTop || document.documentElement.scrollTop;
+ 	
+				xPos += (el.offsetLeft - xScroll + el.clientLeft);
+				yPos += (el.offsetTop - yScroll + el.clientTop);
+			} else {
+				xPos += (el.offsetLeft - el.scrollLeft + el.clientLeft);
+				yPos += (el.offsetTop - el.scrollTop + el.clientTop);
+			}
+ 
+			el = el.offsetParent;
+  		}	
+	  	return {x: xPos, y: yPos};
 	}
 
 
