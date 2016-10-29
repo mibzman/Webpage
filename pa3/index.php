@@ -3,60 +3,73 @@
 
 	<p class = "h1"> Sam Borick's Page Generator</p>
 	<table class= "table table-bordered table-sm" style="width: 50%;">
-		<thead>
-			<tr>
-				<th>Item</td>
-				<th>Description</td>
-				<th>Option</td>
-				<th>Action</td>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-                                <td>HTML Text</td>
-                                <td>Adds HTML plaintext</td>
-                                <td>
-                                        <input type="text" class="form-control" placeholder="Text" id="HTMLText">
-                                </td>
-                                <td><input id = "HTMLButton" value="Add" onClick="HTML();" type="button"></td>
-                        </tr>
+			<thead>
+				<tr>
+					<th>Item</td>
+					<th>Description</td>
+					<th>Option</td>
+					<th>Action</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>HTML Text</td>
+					<td>Adds HTML plaintext</td>
+					<td>
+						<input type="text" class="form-control" placeholder="Text" id="HTMLText">
+					</td>
+					<td><input id = "HTMLButton" value="Add" onClick="HTML();" type="button"></td>
+				</tr>
 
-			<tr>
-                                <td>HTML Line Break</td>
-                                <td>Adds HTML Line Break</td>
-                                <td>None</td>
-                                <td><input id = "Break" value="Add" onClick="LineBreak();" type="button"></td>
-                        </tr>
-			
-			<tr>
-                                <td>HTML Ordered List</td>
-                                <td>Adds an Ordered List</td>
-                                <td>
-					<input type="number" class="form-control" placeholder="Number of list items" id="NumOrdered" min="0">
-				</td>
-                                <td><input id = "Ordered" value="Add" onClick="Ordered();" type="button"></td>
-                        </tr>
+				<tr>
+					<td>HTML Line Break</td>
+					<td>Adds HTML Line Break</td>
+					<td>None</td>
+					<td><input id = "Break" value="Add" onClick="LineBreak();" type="button"></td>
+				</tr>
+				
+				<tr>
+					<td>HTML Ordered List</td>
+					<td>Adds an Ordered List</td>
+					<td>
+						<input type="number" class="form-control" placeholder="Number of list items" id="NumOrdered" min="0">
+					</td>
+					<td><input id = "Ordered" value="Add" onClick="Ordered();" type="button"></td>
+				</tr>
 
-			<tr>
-                                <td>HTML Unordered List</td>
-                                <td>Adds an Unordered List</td>
-                                <td>
-                                        <input type="number" class="form-control" placeholder="Number of list items" id="NumunOrdered" min="0">
-                                </td>
-                                <td><input id = "unOrdered" value="Add" onClick="unOrdered();" type="button"></td>
-                        </tr>
+				<tr>
+					<td>HTML Unordered List</td>
+					<td>Adds an Unordered List</td>
+					<td>
+						<input type="number" class="form-control" placeholder="Number of list items" id="NumunOrdered" min="0">
+					</td>
+					<td><input id = "unOrdered" value="Add" onClick="unOrdered();" type="button"></td>
+				</tr>
+
+				<tr>
+                                        <td>HTML Link</td>
+                                        <td>A Link</td>
+                                        <td>
+                                                <input type="text" class="form-control" placeholder="Link to open" id="linkLink">
+                                                <input type="text" class="form-control" placeholder="Link Text" id="linkText">
+                                        </td>
+                                        <td>
+                                                <input id = "makeLink" value="Add" onClick="MakeLink();" type="button">
+                                        </td>
+                                </tr>
 
 
-
-			<tr>
-        	                <td>Button Link</td>
-                	        <td>A button that opens some link in a new tab</td>
-	                        <td>
-					<input type="text" class="form-control" placeholder="Link to open" id="buttonLink">
-					<input type="text" class="form-control" placeholder="Button Name" id="buttonText">
-				</td>
-				<td><input id = "linkButton" value="Add" onClick="LinkButton();" type="button"></td>
-	                </tr>
+				<tr>
+	        	                <td>Button Link</td>
+        	        	        <td>A button that opens some link in a new tab</td>
+	        	                <td>
+						<input type="text" class="form-control" placeholder="Link to open" id="buttonLink">
+						<input type="text" class="form-control" placeholder="Button Name" id="buttonText">
+					</td>
+					<td>
+						<input id = "linkButton" value="Add" onClick="LinkButton();" type="button">
+					</td>
+	                	</tr>
 		</tbody>
 	</table>
 	

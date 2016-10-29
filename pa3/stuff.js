@@ -65,3 +65,14 @@
 		myWindow.document.write("<SCRIPT src='stuff.js'/>")
 	}
 
+	function MakeLink(){
+		var newLink = document.createElement('a');
+                counter++;
+                newLink.id = counter;
+                var text = document.createTextNode(document.getElementById('linkText').value);
+                newLink.appendChild(text);
+		newLink.href = "http://" + document.getElementById('linkLink').value;
+                document.getElementById('webpage').appendChild(newLink);
+
+	}
+
