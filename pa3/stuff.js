@@ -3,7 +3,7 @@
 		var newbutton = document.createElement('input');
 		counter++;
 		newbutton.id = counter;
-		newbutton.class = "btn";
+		newbutton.setAttribute("class", "btn");
 		newbutton.type = "button";
 		newbutton.value = document.getElementById('buttonText').value;
 		
@@ -61,6 +61,8 @@
 
 	function OpenPage(){
 		var myWindow=window.open('');
+		CSS += "</style>";
+		 myWindow.document.write(CSS);
 		myWindow.document.write(document.getElementById('webpage').innerHTML);
 		myWindow.document.write("<SCRIPT src='stuff.js'/>")
 	}
@@ -76,3 +78,92 @@
 
 	}
 
+	function MakeImg(){
+		var newImg = document.createElement('img');
+                counter++;
+                newImg.id = counter;
+                newImg.src = document.getElementById('ImageLink').value;
+		newImg.height = document.getElementById('ImageHeight').value;
+		newImg.width = document.getElementById('ImageHeight').value;
+                document.getElementById('webpage').appendChild(newImg);
+	}
+	
+	var CSS = "<style>";
+	var CSScounter = 0;
+	
+	function addProperty(){
+		var div = document.createElement('div');
+		div.style = "display:inline-block;";
+		div.class = "css";
+		//div.id = "css";
+		div.id = CSScounter;
+
+		var Prop = document.createElement('input');
+		Prop.id = "Prop"+ CSScounter;
+		Prop.type = "text";
+		Prop.class = "form-control";
+		Prop.placeholder = "Property";
+
+		var Val = document.createElement('input');
+		Val.id = "Val" + CSScounter;
+                Val.type = "text";
+		Val.class = "form-control";
+                Val.placeholder = "Value";
+
+		var col = document.createElement('b');
+		col.innerHTML = ":";
+
+		var br = document.createElement('br');
+		br.id = "br" + CSScounter;
+
+		var scol = document.createElement('b');
+                scol.innerHTML = ";";
+		CSScounter++;
+		div.appendChild(Prop);
+		div.appendChild(col);
+		div.appendChild(Val);
+		div.appendChild(scol);
+		//div.appendChild(br);
+
+		document.getElementById('CSSblock').appendChild(div);
+	}
+
+	function MakeCSS(){
+		var selector = document.getElementById("CSSSelector");
+		switch(selector.selectedIndex){
+			case 0:
+				CSS += "H4";
+				break;
+			case 1:
+				CSS += "br";
+				break;
+			case 2:
+                                CSS += "ol";
+                                break;
+			case 3:
+                                CSS += "ul";
+                                break;
+			case 4:
+                                CSS += "a";
+                                break;
+			case 5:
+                                CSS += ".btn";
+                                break;
+			case 6:
+                                CSS += "img";
+                                break;
+			default:
+                                CSS += "unk";
+		}
+		CSS += "{";
+		for(i=0; i < CSScounter; i++){
+			CSS += document.getElementById('Prop' + i).value + ":" + document.getElementById('Val' + i).value + ";";
+			document.getElementById('CSSblock').removeChild(document.getElementById(i));
+		}
+		CSS += "}";
+		CSScounter = 0;
+	}
+
+	function RemoveCSS() {
+		CSS = "<style";
+	}

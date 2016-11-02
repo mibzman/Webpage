@@ -1,4 +1,9 @@
 <?php require 'front_header.html'; ?>
+<style>
+	.css {
+		display:inline-block;
+	}
+</style>
 	<body>
 
 	<p class = "h1"> Sam Borick's Page Generator</p>
@@ -18,14 +23,18 @@
 					<td>
 						<input type="text" class="form-control" placeholder="Text" id="HTMLText">
 					</td>
-					<td><input id = "HTMLButton" value="Add" onClick="HTML();" type="button"></td>
+					<td>
+						<input class="btn" id = "HTMLButton" value="Add" onClick="HTML();" type="button">
+					</td>
 				</tr>
 
 				<tr>
 					<td>HTML Line Break</td>
 					<td>Adds HTML Line Break</td>
 					<td>None</td>
-					<td><input id = "Break" value="Add" onClick="LineBreak();" type="button"></td>
+					<td>
+						<input class="btn" id = "Break" value="Add" onClick="LineBreak();" type="button">
+					</td>
 				</tr>
 				
 				<tr>
@@ -34,7 +43,9 @@
 					<td>
 						<input type="number" class="form-control" placeholder="Number of list items" id="NumOrdered" min="0">
 					</td>
-					<td><input id = "Ordered" value="Add" onClick="Ordered();" type="button"></td>
+					<td>
+						<input class="btn" id = "Ordered" value="Add" onClick="Ordered();" type="button">
+					</td>
 				</tr>
 
 				<tr>
@@ -43,7 +54,9 @@
 					<td>
 						<input type="number" class="form-control" placeholder="Number of list items" id="NumunOrdered" min="0">
 					</td>
-					<td><input id = "unOrdered" value="Add" onClick="unOrdered();" type="button"></td>
+					<td>
+						<input class="btn" id = "unOrdered" value="Add" onClick="unOrdered();" type="button">
+					</td>
 				</tr>
 
 				<tr>
@@ -54,7 +67,7 @@
                                                 <input type="text" class="form-control" placeholder="Link Text" id="linkText">
                                         </td>
                                         <td>
-                                                <input id = "makeLink" value="Add" onClick="MakeLink();" type="button">
+                                                <input class="btn" id = "makeLink" value="Add" onClick="MakeLink();" type="button">
                                         </td>
                                 </tr>
 
@@ -67,9 +80,50 @@
 						<input type="text" class="form-control" placeholder="Button Name" id="buttonText">
 					</td>
 					<td>
-						<input id = "linkButton" value="Add" onClick="LinkButton();" type="button">
+						<input class="btn" id = "linkButton" value="Add" onClick="LinkButton();" type="button">
 					</td>
 	                	</tr>
+
+				<tr>
+                                        <td>HTML Image</td>
+                                        <td>An image</td>
+                                        <td>
+                                                <input type="text" class="form-control" placeholder="Image Link" id="ImageLink">
+						<input type="number" class="form-control" placeholder="Height" id="ImageHeight" min="0">
+						<input type="number" class="form-control" placeholder="Width" id="ImageWidth" min="0">
+                                                
+                                        </td>
+                                        <td>
+                                                <input class="btn" id = "makeImg" value="Add" onClick="MakeImg();" type="button">
+                                        </td>
+                                </tr>
+
+				<tr>
+                                        <td>CSS</td>
+                                        <td>CSS style</td>
+                                        <td>
+						<label for="CSSSelector">CSS Selector</textarea>
+						<select id="CSSSelector" class="form-control">
+							<option>Text</option>
+							<option>Line Break</option>
+							<option>Ordered List</option>
+							<option>Unordered List</option>
+							<option>Link</option>
+							<option>Button</option>
+							<option>Image</option>
+						</select> <p>{</p>
+						<div id="CSSblock"></div>
+						<br>
+						<p>}</p>
+						<input class="btn btn-block" type="button" value = "add Property:Value" onclick="addProperty();">
+                                        </td>
+                                        <td>
+                                                <input class="btn" id = "makeCSS" value="Add" onClick="MakeCSS();" type="button">
+						<br>
+						<input class="btn" id = "makeCSS" value="Remove all CSS" onClick="RemoveCSS();" type="button">
+                                        </td>
+                                </tr>
+
 		</tbody>
 	</table>
 	
