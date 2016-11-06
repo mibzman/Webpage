@@ -1,4 +1,14 @@
-	var counter = 0;
+	var counter = 0;//counts all elements
+	var title = "<title>Untitled Page</title>";
+	var CSS = "<style>";
+	var CSScounter = 0;
+        var CSScounter2 = 0;
+	var buttonCounter = 0;
+	var listCounter = 0;
+	var HTMLCounter =0;
+	var imageCounter = 0;
+	
+
 	function LinkButton(){
 		var newbutton = document.createElement('input');
 		counter++;
@@ -19,12 +29,14 @@
 		var text = document.createTextNode(document.getElementById('HTMLText').value);
 		newText.appendChild(text);
 		document.getElementById('webpage').appendChild(newText);
+		HTMLCounter++;
 	}
 	function LineBreak(){
 		var br = document.createElement('br');
 		counter++;
                 br.id = counter;
                 document.getElementById('webpage').appendChild(br);
+		HTMLCounter++;
 	}
 	function Ordered(){
 		var newList = document.createElement('ol');
@@ -34,6 +46,7 @@
 			newList.appendChild(TakeListItem(i));
 		}
 		document.getElementById('webpage').appendChild(newList);
+		listCounter++;
 	}
 	function unOrdered(){
                 var newList = document.createElement('ul');
@@ -43,6 +56,7 @@
                         newList.appendChild(TakeListItem(i));
                 }
                 document.getElementById('webpage').appendChild(newList);
+		listCounter++;
         }
 	function TakeListItem(i){ //taken from my pa2
 		var value = prompt("Please enter the " + i + "th  member value");
@@ -54,17 +68,68 @@
 	function DeleteElement(){
 		if(counter > 0){
 			var DeadMan = document.getElementById(counter);
+			var name = DeadMan.tagName.toLowerCase();
+			if(name == "input"){
+				buttonCounter--;
+			}else if (name == "h4" || name == "br" || name == "h1" || name == "a"){
+				HTMLCounter--;
+			}else if (name == "ol" || name == "ul"){
+				listCounter--;
+			}else if (name == "img"){
+				imageCounter--;
+			}
 			document.getElementById('webpage').removeChild(DeadMan);
 			counter--;
 		}
 	}
 
 	function OpenPage(){
-		var myWindow=window.open('');
-		CSS += "</style>";
-		 myWindow.document.write(CSS);
+		var myWindow=window.open("", "myWindow");//window.open('',"test");
+		CSS += "XML{display:none;}</style>";
+		myWindow.document.write(CSS);
+		myWindow.document.write(title);
 		myWindow.document.write(document.getElementById('webpage').innerHTML);
-		myWindow.document.write("<SCRIPT src='stuff.js'/>")
+		myWindow.document.write(GenerateXML());
+	}
+
+	function GenerateXML(){
+		var XML = "";
+		XML += "<?xml version='1.0'?> <XML>";
+		//here we go
+		var date = new Date();
+		XML += element("webpage",
+			element("metadata",
+				element("generator",
+					element("created_by", "Sam Borick's Page Generator") +
+					element("browser", navigator.userAgent) +
+					element("time", date.getHours() + ":" + date.getMinutes()) +
+					element("date", date.getDay() + "-" + date.getMonth() + "-" + date.getFullYear())
+				)+
+				element("page",
+					element("counters",
+						element("total", counter) +
+						element("lists", listCounter) +
+						element("buttons", buttonCounter) +
+						element("CSS", CSScounter) +
+						element("images", imageCounter) +
+						element("HTML", HTMLCounter)
+					)
+				)
+			)
+		);
+		XML += "</XML>";
+		return XML;				
+	}
+
+	function element(name,content){
+		var xml;
+		if (!content){
+			xml='<' + name + '/>';
+		}
+		else {
+			xml='<'+ name + '>' + content + '</' + name + '>\n';
+		}
+		return xml;
 	}
 
 	function MakeLink(){
@@ -74,8 +139,7 @@
                 var text = document.createTextNode(document.getElementById('linkText').value);
                 newLink.appendChild(text);
 		newLink.href = "http://" + document.getElementById('linkLink').value;
-                document.getElementById('webpage').appendChild(newLink);
-
+		HTMLCounter++;
 	}
 
 	function MakeImg(){
@@ -86,10 +150,9 @@
 		newImg.height = document.getElementById('ImageHeight').value;
 		newImg.width = document.getElementById('ImageHeight').value;
                 document.getElementById('webpage').appendChild(newImg);
+		imageCounter++
 	}
 	
-	var CSS = "<style>";
-	var CSScounter = 0;
 	
 	function addProperty(){
 		var div = document.createElement('div');
@@ -132,24 +195,27 @@
 		var selector = document.getElementById("CSSSelector");
 		switch(selector.selectedIndex){
 			case 0:
-				CSS += "H4";
+				CSS += "h4";
 				break;
 			case 1:
-				CSS += "br";
+				CSS += "h1";
 				break;
 			case 2:
+				CSS += "br";
+				break;
+			case 3:
                                 CSS += "ol";
                                 break;
-			case 3:
+			case 4:
                                 CSS += "ul";
                                 break;
-			case 4:
+			case 5:
                                 CSS += "a";
                                 break;
-			case 5:
+			case 6:
                                 CSS += ".btn";
                                 break;
-			case 6:
+			case 7:
                                 CSS += "img";
                                 break;
 			default:
@@ -161,9 +227,24 @@
 			document.getElementById('CSSblock').removeChild(document.getElementById(i));
 		}
 		CSS += "}";
-		CSScounter = 0;
+		CSScounter2 = 0;
+		CSScounter++;
+	}
+
+	function HTMLTitle(){
+		var newText = document.createElement('H1');
+                counter++;
+                newText.id = counter;
+                var text = document.createTextNode(document.getElementById('HTMLTitle').value);
+                newText.appendChild(text);
+                document.getElementById('webpage').appendChild(newText);
 	}
 
 	function RemoveCSS() {
 		CSS = "<style";
+		CSScounter = 0;
+	}
+
+	function PageTitle(){
+		title = "<title>" + document.getElementById('PageTitle').value + "</title>";
 	}
